@@ -9,7 +9,9 @@ function DefaultLayout() {
       </header>
 
       <main className="container mt-4">
-        <Outlet />
+        <div className="row">
+          <Outlet />
+        </div>
       </main>
     </>
   );

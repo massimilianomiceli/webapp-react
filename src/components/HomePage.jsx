@@ -22,7 +22,7 @@ function HomePage() {
   const renderMovieCard = () => {
     return movies.map((movie) => {
       return (
-        <div className="col" key={movie.id}>
+        <div className="col-3" key={movie.id}>
           <MovieCard movie={movie} />
         </div>
       );
