@@ -4,7 +4,7 @@ function MainNavbar() {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/dashboard">
+        <Link className="navbar-brand" to="/">
           Bool Movies
         </Link>
       </div>
