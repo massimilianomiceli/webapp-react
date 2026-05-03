@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+import MovieCard from "../components/MovieCard";
+
 function HomePage() {
   const [movies, setMovies] = useState([]);
 
@@ -17,7 +19,17 @@ function HomePage() {
 
   useEffect(fetchMovies, []);
 
-  return <h1>{movies[0]?.id}</h1>;
+  const renderMovieCard = () => {
+    return movies.map((movie) => {
+      return (
+        <div className="col" key={movie.id}>
+          <MovieCard movie={movie} />
+        </div>
+      );
+    });
+  };
+
+  return <>{renderMovieCard()}</>;
 }
 
 export default HomePage;
