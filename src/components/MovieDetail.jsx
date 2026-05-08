@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewsCard";
+import ReviewsForm from "./ReviewsForm";
 
 function MovieDetail() {
   const { id } = useParams();
@@ -37,13 +38,14 @@ function MovieDetail() {
     <>
       <span>{movie.genre}</span>
       <h1>{movie.title}</h1>
-      <h2>
+      <h3>
         By {movie.director} - {movie.release_year}
-      </h2>
+      </h3>
       <p>{movie.abstract}</p>
       <hr></hr>
       <h2>Reviews:</h2>
       {renderReviewCard()}
+      {movie?.id && <ReviewsForm movie_id={movie.id} />}
     </>
   );
 }
