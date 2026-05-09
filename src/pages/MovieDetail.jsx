@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReviewCard from "../components/ReviewsCard";
 import ReviewsForm from "../components/ReviewsForm";
 import { useGlobal } from "../context/GlobalContext";
 
 function MovieDetail() {
+  const redirect = useNavigate();
+
   const { setIsLoading } = useGlobal();
 
   const loadingFalse = () => {
@@ -27,6 +29,7 @@ function MovieDetail() {
       })
       .catch((err) => {
         console.log(err);
+        if (err.status === 404) redirect("/404");
       })
       .finally(() => {
         setTimeout(loadingFalse, 2000);
