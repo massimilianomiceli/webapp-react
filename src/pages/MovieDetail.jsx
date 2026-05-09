@@ -3,14 +3,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "../components/ReviewsCard";
 import ReviewsForm from "../components/ReviewsForm";
+import { useGlobal } from "../context/GlobalContext";
 
 function MovieDetail() {
+  const { setIsLoading } = useGlobal();
+
+  const loadingFalse = () => {
+    setIsLoading(false);
+  };
+
   const { id } = useParams();
 
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
 
   const fetchMovie = () => {
+    setIsLoading(true);
     axios
       .get(`http://localhost:3000/api/movies/${id}`)
       .then((response) => {
@@ -19,6 +27,9 @@ function MovieDetail() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setTimeout(loadingFalse, 2000);
       });
   };
 
