@@ -1,12 +1,19 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import { useGlobal } from "../context/GlobalContext";
 import MovieCard from "../components/MovieCard";
 
 function HomePage() {
+  const { setIsLoading } = useGlobal();
+
+  const loadingFalse = () => {
+    setIsLoading(false);
+  };
+
   const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {
+    setIsLoading(true);
     axios
       .get("http://localhost:3000/api/movies")
       .then((response) => {
@@ -14,6 +21,9 @@ function HomePage() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setTimeout(loadingFalse, 2000);
       });
   };
 
