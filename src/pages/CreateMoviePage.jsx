@@ -151,7 +151,7 @@ function CreateMoviePage({ movie_id, refreshReviews }) {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Invia
           </button>
         </form>
       </div>

@@ -53,11 +53,11 @@ function MovieDetail() {
       <span>{movie.genre}</span>
       <h1>{movie.title}</h1>
       <h3>
-        By {movie.director} - {movie.release_year}
+        Prodotto da {movie.director} - {movie.release_year}
       </h3>
       <p>{movie.abstract}</p>
       <hr></hr>
-      <h2>Reviews:</h2>
+      <h2>Recensioni:</h2>
       {renderReviewCard()}
       {movie?.id && (
         <ReviewsForm movie_id={movie.id} refreshReviews={fetchMovie} />
