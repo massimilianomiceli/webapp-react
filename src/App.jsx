@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import MovieDetail from "./pages/MovieDetail";
 import CreateMoviePage from "./pages/CreateMoviePage";
 import { GlobalProvider } from "./context/GlobalContext";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/movies/create" element={<CreateMoviePage />} />
               <Route path="/movies/:id" element={<MovieDetail />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
