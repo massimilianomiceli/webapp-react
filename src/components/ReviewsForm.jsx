@@ -11,14 +11,28 @@ function ReviewsForm({ movie_id, refreshReviews }) {
   };
 
   const [formData, setFormData] = useState(initialValueForm);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const setFieldValue = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const validateForm = () => {
+    if (!formData.name || !formData.text) return false;
+    if (isNaN(formData.vote) || formData.vote < 1 || formData.vote > 5)
+      return false;
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      setIsFormValid(false);
+      return;
+    }
+
     axios
       .post(apiUrl, formData, {
         headers: { "Content-Type": "application/json" },
@@ -29,12 +43,20 @@ function ReviewsForm({ movie_id, refreshReviews }) {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsFormValid(true);
       });
   };
 
   return (
     <div className="card">
       <div className="card-body">
+        {!isFormValid && (
+          <div className="alert alert-danger mb-3">
+            I dati inseriti non sono validi
+          </div>
+        )}
         <h5 className="card-title">Inserisci una recensione</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
