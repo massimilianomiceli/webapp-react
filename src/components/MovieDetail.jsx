@@ -45,7 +45,9 @@ function MovieDetail() {
       <hr></hr>
       <h2>Reviews:</h2>
       {renderReviewCard()}
-      {movie?.id && <ReviewsForm movie_id={movie.id} />}
+      {movie?.id && (
+        <ReviewsForm movie_id={movie.id} refreshReviews={fetchMovie} />
+      )}
     </>
   );
 }
