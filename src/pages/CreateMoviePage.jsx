@@ -17,6 +17,7 @@ function CreateMoviePage({ movie_id, refreshReviews }) {
   };
 
   const [formData, setFormData] = useState(initialValueForm);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const setFieldValue = (e) => {
     const { name, value } = e.target;
@@ -25,8 +26,27 @@ function CreateMoviePage({ movie_id, refreshReviews }) {
     else setFormData({ ...formData, [name]: value });
   };
 
+  const validateForm = () => {
+    if (
+      !formData.title ||
+      !formData.director ||
+      !formData.genre ||
+      !formData.abstract ||
+      !formData.image
+    )
+      return false;
+    if (isNaN(formData.release_year)) return false;
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      setIsFormValid(false);
+      return;
+    }
+
     axios
       .post(apiUrl, formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -37,12 +57,20 @@ function CreateMoviePage({ movie_id, refreshReviews }) {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsFormValid(true);
       });
   };
 
   return (
     <div className="card">
       <div className="card-body">
+        {!isFormValid && (
+          <div className="alert alert-danger mb-3">
+            I dati inseriti non sono validi
+          </div>
+        )}
         <h5 className="card-title">Inserisci un nuovo film</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
