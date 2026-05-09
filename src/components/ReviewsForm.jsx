@@ -20,7 +20,9 @@ function ReviewsForm({ movie_id, refreshReviews }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(apiUrl, formData, { header: { Content_Type: "application/json" } })
+      .post(apiUrl, formData, {
+        header: { "Content-Type": "application/json" },
+      })
       .then(() => {
         setFormData(initialValueForm);
         refreshReviews();
@@ -52,14 +54,14 @@ function ReviewsForm({ movie_id, refreshReviews }) {
             <label htmlFor="text" className="form-label">
               Recensione
             </label>
-            <input
+            <textarea
               type="text"
               className="form-control"
               id="text"
               name="text"
               value={formData.text}
               onChange={setFieldValue}
-            />
+            ></textarea>
           </div>
           <div className="mb-3">
             <label htmlFor="vote" className="form-label">
