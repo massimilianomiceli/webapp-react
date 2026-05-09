@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function MainNavbar() {
   return (
@@ -7,6 +7,13 @@ function MainNavbar() {
         <Link className="navbar-brand" to="/">
           Bool Movies
         </Link>
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <NavLink to="/movies/create" className="nav-link">
+              Aggiungi un film
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </nav>
   );
