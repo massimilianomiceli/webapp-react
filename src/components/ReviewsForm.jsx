@@ -21,7 +21,7 @@ function ReviewsForm({ movie_id, refreshReviews }) {
     e.preventDefault();
     axios
       .post(apiUrl, formData, {
-        header: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
       })
       .then(() => {
         setFormData(initialValueForm);
