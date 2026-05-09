@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ReviewCard from "./ReviewsCard";
-import ReviewsForm from "./ReviewsForm";
+import ReviewCard from "../components/ReviewsCard";
+import ReviewsForm from "../components/ReviewsForm";
 
 function MovieDetail() {
   const { id } = useParams();
